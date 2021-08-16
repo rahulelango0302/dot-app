@@ -1,3 +1,4 @@
+import 'package:dot/Login_page/infomation.dart';
 import 'package:dot/adapters/films_adapter.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
@@ -12,15 +13,38 @@ class Movielist extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => AddFilms()),
-          );
-        },
+      floatingActionButton: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.only(bottom: 8.0),
+          child: Column(
+            children: [
+              FloatingActionButton(
+                backgroundColor: Colors.blue,
+                child: Icon(Icons.add),
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => AddFilms()),
+                  );
+                },
+              ),Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: FloatingActionButton(backgroundColor: Colors.red,
+                  child: Icon(Icons.logout,color: Colors.black),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Login()),
+
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         centerTitle: true,
         title:
         Text("Movie Buzz", style: TextStyle(color: Colors.amber)),
@@ -40,23 +64,7 @@ class Movielist extends StatelessWidget {
                 ),
               )
           ),
-      Padding(
-      padding: EdgeInsets.only(right: 20.0),
-        child: GestureDetector(
-          onTap: () {
-            n=1;
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => Login()),
-            );
-          },
-          child: Icon(
-            Icons.logout,
-            size: 26.0,
-            color: Colors.red,
-          ),
-        )
-    ),]
+      ]
       ),
       body: ValueListenableBuilder(
         valueListenable: Hive.box<Film>('films').listenable(),
@@ -83,6 +91,8 @@ class Movielist extends StatelessWidget {
                     film.director,
                     style: TextStyle(fontSize: 16),
                   ),
+
+
                 );
               });
         },

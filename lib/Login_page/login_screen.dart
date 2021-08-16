@@ -81,7 +81,7 @@ class _LoginState extends State<Login> {
               onPressed: () {
                 gsign.signIn();
                 if(auth=true){
-                  Navigator.push(
+                  Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(builder: (context) => Movielist()),
                   );
