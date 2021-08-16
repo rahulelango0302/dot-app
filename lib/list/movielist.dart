@@ -24,7 +24,22 @@ class Movielist extends StatelessWidget {
         centerTitle: true,
         title:
         Text("Movie Buzz", style: TextStyle(color: Colors.amber)),
-          actions: <Widget>[
+          actions: <Widget>[Padding(
+              padding: EdgeInsets.only(right: 20.0),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Info()),
+                  );
+                },
+                child: Icon(
+                  Icons.info_outline,
+                  size: 26.0,
+                  color: Colors.white,
+                ),
+              )
+          ),
       Padding(
       padding: EdgeInsets.only(right: 20.0),
         child: GestureDetector(
